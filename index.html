@@ -1,23 +1,42 @@
 <!DOCTYPE html>
-<html lang="de">
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>WebAR Modell</title>
-  <!-- Lade das Model‐Viewer‑Web‑Component -->
-  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Model Viewer with AR</title>
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+    <style>
+        body { margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; background: #f3f3f3; }
+        model-viewer { width: 100%; max-width: 600px; height: 500px; }
+    </style>
+    <script>
+        function getModelPath() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const modelName = 'ARModellBIM.glb';
+            return `${modelName}`;
+        }
+    </script>
 </head>
-<body style="margin:0; padding:0; overflow:hidden;">
-
-  <!-- Dein 3D‑Modell mit AR‑Funktion -->
-  <model-viewer
-    src="tripo_pbr_model_09149cd8-0e9d-4fd2-b0bc-f2129039e195.glb"
-    alt="3D Modell"
-    camera-controls
-    auto-rotate
-    ar
-    ar-modes="scene-viewer quick-look"
-    style="width:100vw; height:100vh;">
-  </model-viewer>
-
+<body>
+    <model-viewer 
+        id="modelViewer"
+        ar 
+        ar-modes="webxr scene-viewer quick-look" 
+        ar-scale="fixed"
+        ar-placement="floor"
+        camera-controls 
+        auto-rotate 
+        shadow-intensity="1">
+        <button slot="ar-button" style="background: #0078D4; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
+            View in AR
+        </button>
+    </model-viewer>
+    
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const modelViewer = document.getElementById('modelViewer');
+            modelViewer.setAttribute('src', getModelPath());
+        });
+    </script>
 </body>
 </html>
