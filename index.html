@@ -2,24 +2,22 @@
 <html lang="de">
 <head>
   <meta charset="utf-8">
-  <title>WebAR mit Modell</title>
-  <!-- A‑Frame + AR.js -->
-  <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
-  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-  <style> body { margin: 0; overflow: hidden; } </style>
+  <title>WebAR Modell</title>
+  <!-- Lade das Model‐Viewer‑Web‑Component -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 </head>
-<body>
-  <a-scene embedded arjs="trackingMethod: best; sourceType: webcam;">
-    <a-assets>
-      <a-asset-item id="model" src="models/tripo_model.glb"></a-asset-item>
-    </a-assets>
+<body style="margin:0; padding:0; overflow:hidden;">
 
-    <!-- Modell-Entity mit Position & Scale -->
-    <a-entity gltf-model="#model"
-              scale="0.5 0.5 0.5"
-              position="0 0 -2"></a-entity>
+  <!-- Dein 3D‑Modell mit AR‑Funktion -->
+  <model-viewer
+    src="tripo_pbr_model_09149cd8-0e9d-4fd2-b0bc-f2129039e195.glb"
+    alt="3D Modell"
+    camera-controls
+    auto-rotate
+    ar
+    ar-modes="scene-viewer quick-look"
+    style="width:100vw; height:100vh;">
+  </model-viewer>
 
-    <a-camera position="0 0 0"></a-camera>
-  </a-scene>
 </body>
 </html>
